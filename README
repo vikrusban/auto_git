@@ -1,0 +1,5 @@
+#Install requirements
+pip install -r requirements.txt
+
+#Use script
+python.exe .\git-update.py -f list.txt -d repo
