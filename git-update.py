@@ -15,15 +15,18 @@ with open(f) as file:
     array = [row.strip() for row in file]
 
 for i in array:
-    link_repo = urlparse(i)
-    link_repo_path = link_repo.path[1:]
-    dir_repo = link_repo_path[link_repo_path.find("/") + 1 : ]
-    dir = Path(d, dir_repo)
-
-    if dir.is_dir():
-        print('git pull '+i)
-        g = git.cmd.Git(d+'/'+dir_repo)
-        g.pull()
+    if i == '':
+        print('Empty string to file')
     else:
-        print('git clone '+i)
-        git.Repo.clone_from(i, d+'/'+dir_repo)
+        link_repo = urlparse(i)
+        link_repo_path = link_repo.path[1:]
+        dir_repo = link_repo_path[link_repo_path.find("/") + 1 : ]
+        dir = Path(d, dir_repo)
+
+        if dir.is_dir():
+            print('git pull '+i)
+            g = git.cmd.Git(d+'/'+dir_repo)
+            g.pull()
+        else:
+            print('git clone '+i)
+            git.Repo.clone_from(i, d+'/'+dir_repo)
